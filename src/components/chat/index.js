@@ -11,27 +11,7 @@ import {
 import dayjs from 'dayjs';
 
 import Message from './Message';
-
-function getDayOfWeek(idx) {
-    switch (idx) {
-        case 0:
-            return '일';
-        case 1:
-            return '월';
-        case 2:
-            return '화';
-        case 3:
-            return '수';
-        case 4:
-            return '목';
-        case 5:
-            return '금';
-        case 6:
-            return '토';
-        default:
-            return '';
-    }
-}
+import util from '../../lib/util';
 
 const Chat = ({ socket, user, logOut }) => {
     const [messages, setMessages] = useState([
@@ -40,7 +20,7 @@ const Chat = ({ socket, user, logOut }) => {
             user,
             message: `${dayjs(new Date()).format(
                 'YYYY년 MM월 DD일',
-            )} ${getDayOfWeek(dayjs(new Date()).day())}요일`,
+            )} ${util.getDayOfWeek()}요일`,
         },
     ]);
     const [sendMessage, setSendMessage] = useState('');
@@ -111,9 +91,9 @@ const Chat = ({ socket, user, logOut }) => {
                 </div>
             </header>
             <main className="main-screen main-chat" ref={mainRef}>
-                {messages.map((message, idx) => {
-                    return <Message message={message} user={user} key={idx} />;
-                })}
+                {messages.map((message, idx) => (
+                    <Message message={message} user={user} key={idx} />
+                ))}
             </main>
             <form className="reply" onSubmit={handleSubmit}>
                 <div className="reply__column">

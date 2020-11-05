@@ -6,7 +6,9 @@ import {
     faBolt,
 } from '@fortawesome/free-solid-svg-icons';
 
-const StatusBar = () => {
+import dayjs from 'dayjs';
+
+const StatusBar = ({ time }) => {
     return (
         <div className="status-bar">
             <div className="status-bar__column">
@@ -14,7 +16,7 @@ const StatusBar = () => {
                 <FontAwesomeIcon icon={faWifi} />
             </div>
             <div className="status-bar__column">
-                <span>18:30</span>
+                <span>{time ? time : dayjs().format('HH:mm')}</span>
             </div>
             <div className="status-bar__column">
                 <span>100%</span>

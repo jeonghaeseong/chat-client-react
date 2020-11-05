@@ -4,6 +4,11 @@ import dayjs from 'dayjs';
 import InfoMessage from './InfoMessage';
 import userEmpty from '../../images/user-empty.png';
 
+/**
+ * 자신의 메세지
+ * @param {Object} message
+ * @param {Object} item
+ */
 const MyMessage = ({ message, time }) => {
     return (
         <div className="message-row message-row--own">
@@ -17,10 +22,17 @@ const MyMessage = ({ message, time }) => {
     );
 };
 
-const OtherMessage = ({ name, message, time }) => {
+const OtherMessage = ({ name, message, time, profile }) => {
     return (
         <div className="message-row">
-            <img src={userEmpty} alt="" />
+            <img
+                src={
+                    profile
+                        ? `http://192.168.0.41:4000/upload/profile/${profile}`
+                        : userEmpty
+                }
+                alt=""
+            />
             <div className="message-row__content">
                 <span className="message__author">{name}</span>
                 <div className="message__info">
@@ -39,6 +51,7 @@ const Message = ({ message, user }) => {
     if (message.type === 'info') {
         msg = <InfoMessage message={message.message} />;
     } else {
+        console.log(message, user);
         if (message.user.email === user.email) {
             msg = (
                 <MyMessage
@@ -52,6 +65,7 @@ const Message = ({ message, user }) => {
                     message={message.message}
                     name={message.user.name}
                     time={now.format('HH:mm')}
+                    profile={message.user.profile}
                 />
             );
         }
