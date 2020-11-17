@@ -34,14 +34,14 @@ function App() {
                 },
             })
             .then((res) => {
-                console.log(res);
+                console.log('login handleSubmit : ', res);
 
                 setEmail('');
                 setChatInfo({
                     ...chatInfo,
                     socket: socketio.connect('http://192.168.0.41:4000'),
                     isLoggedIn: true,
-                    user: res.data.data,
+                    user: res.data.user,
                 });
             })
             .catch((e) => {

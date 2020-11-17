@@ -45,6 +45,8 @@ const OtherMessage = ({ name, message, time, profile }) => {
 };
 
 const Message = ({ message, user }) => {
+    console.log('Message component : ', message);
+
     const now = dayjs(new Date());
     let msg;
 
